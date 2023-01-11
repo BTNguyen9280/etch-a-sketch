@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+    height: 960px;
+    width: 960px;
+    flex-wrap: wrap;
+}
+
+.cell {
+    background-color: white;
+    border: 1px solid red;
+    flex: 1 0 auto; 
+    box-sizing: border-box;
+}
+
+.filled {
+    background-color: black;
+}
