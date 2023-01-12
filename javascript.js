@@ -16,12 +16,24 @@ const makeDivs = (num, i=0) => {
     return makeDivs(num,++i);
 }
 
-makeDivs(8)
-
-var cells = document.getElementsByClassName('cell');
-Array.from(cells).forEach(function(cells) {
-    cells.addEventListener('mouseenter', (e) => {
-        cells.classList.add('filled')
+const makeGrid = document.querySelector('.makeGrid')
+makeGrid.onclick = () => {
+    var size  = prompt('Enter a grid size')
+    if (size > 100) {
+        alert('Enter a number lower than 101')
+        var size = prompt('Enter a grid size')
+    }
+    clearGrid()
+    makeDivs(size)
+    var cells = document.getElementsByClassName('cell');
+    Array.from(cells).forEach(function(cells) {
+      cells.addEventListener('mouseenter', (e) => {
+          cells.classList.add('filled')
     })
-})
+    })
+}
+
+const clearGrid = () => {
+    document.querySelector('.container').innerHTML=''
+}
 
