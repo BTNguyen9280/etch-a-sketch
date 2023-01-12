@@ -37,3 +37,10 @@ const clearGrid = () => {
     document.querySelector('.container').innerHTML=''
 }
 
+const reset = document.querySelector('.reset')
+reset.onclick= () => {
+    var cells = document.getElementsByClassName('cell');
+    Array.from(cells).forEach(function(cells) {
+        cells.classList.remove('filled')
+    })
+}
