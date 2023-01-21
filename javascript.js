@@ -1,7 +1,7 @@
 const grid = document.querySelector(".container")
 
 const makeDivs = (num, i=0) => {
-    var boxDimensions =960/num
+    let boxDimensions =960/num
     if (i >=num*num) {
         var elements = document.getElementsByClassName('cell');
         Array.from(elements).forEach(function(element) {
@@ -25,12 +25,28 @@ makeGrid.onclick = () => {
     }
     clearGrid()
     makeDivs(size)
-    var cells = document.getElementsByClassName('cell');
-    Array.from(cells).forEach(function(cells) {
-      cells.addEventListener('mouseenter', (e) => {
-          cells.classList.add('filled')
+    let cells = document.getElementsByClassName('cell');
+    Array.from(cells).forEach(cells => {
+    cells.addEventListener('mouseenter',fillFunction)
     })
-    })
+    }
+
+const fillFunction = (event) => {
+    event.target.classList.add('filled')
+}    
+
+let blackFill = false
+const blackOn = document.querySelector('.black')
+blackOn.onclick= () => {
+    blackFill = true
+    rainbowFill = false
+}
+
+let rainbowFill
+const rainbowOn = document.querySelector('.rainbow')
+rainbowOn.onclick = () => {
+    rainbowFill = true
+    blackFill = false
 }
 
 const clearGrid = () => {
@@ -39,8 +55,13 @@ const clearGrid = () => {
 
 const reset = document.querySelector('.reset')
 reset.onclick= () => {
-    var cells = document.getElementsByClassName('cell');
+    let cells = document.getElementsByClassName('cell');
     Array.from(cells).forEach(function(cells) {
         cells.classList.remove('filled')
+        cells.classList.add('cleared')
+        cells.classList.remove('cleared')
     })
 }
+
+
+
