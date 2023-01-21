@@ -26,27 +26,44 @@ makeGrid.onclick = () => {
     clearGrid()
     makeDivs(size)
     let cells = document.getElementsByClassName('cell');
-    Array.from(cells).forEach(cells => {
-    cells.addEventListener('mouseenter',fillFunction)
-    })
+    if (blackFill) { 
+      Array.from(cells).forEach(cells => {
+      cells.addEventListener('mouseenter',BlackFillFunction)
+      })
+    }
     }
 
-const fillFunction = (event) => {
-    event.target.classList.add('filled')
-}    
-
-let blackFill = false
+let blackFill = true
 const blackOn = document.querySelector('.black')
 blackOn.onclick= () => {
     blackFill = true
-    rainbowFill = false
+    let cells = document.getElementsByClassName('cell');
+    Array.from(cells).forEach(cells => { 
+        cells.addEventListener('mouseenter',BlackFillFunction)
+    })
 }
 
-let rainbowFill
+const BlackFillFunction = (event) => {
+    if (blackFill) {
+    event.target.classList.add('filled')
+    event.target.classList.remove('rgb')
+    }
+}    
+
 const rainbowOn = document.querySelector('.rainbow')
 rainbowOn.onclick = () => {
-    rainbowFill = true
     blackFill = false
+    let cells = document.getElementsByClassName('cell');
+    Array.from(cells).forEach(cells => {
+        cells.addEventListener('mouseenter',rgbFillFunction)
+    })
+}
+
+const rgbFillFunction = (event) => {
+    if (!blackFill) {
+    event.target.classList.add('rgb')
+    event.target.classList.remove('filled')
+    }
 }
 
 const clearGrid = () => {
@@ -57,9 +74,7 @@ const reset = document.querySelector('.reset')
 reset.onclick= () => {
     let cells = document.getElementsByClassName('cell');
     Array.from(cells).forEach(function(cells) {
-        cells.classList.remove('filled')
-        cells.classList.add('cleared')
-        cells.classList.remove('cleared')
+        cells.className='cell'
     })
 }
 
