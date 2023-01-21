@@ -1,3 +1,4 @@
+// Create grid function
 const grid = document.querySelector(".container")
 
 const makeDivs = (num, i=0) => {
@@ -33,6 +34,7 @@ makeGrid.onclick = () => {
     }
     }
 
+//Fill color selector (black)
 let blackFill = true
 const blackOn = document.querySelector('.black')
 blackOn.onclick= () => {
@@ -45,11 +47,12 @@ blackOn.onclick= () => {
 
 const BlackFillFunction = (event) => {
     if (blackFill) {
+    event.target.style.backgroundColor = ''
     event.target.classList.add('filled')
-    event.target.classList.remove('rgb')
     }
 }    
 
+//Fill color selector (Random RGB)
 const rainbowOn = document.querySelector('.rainbow')
 rainbowOn.onclick = () => {
     blackFill = false
@@ -61,22 +64,29 @@ rainbowOn.onclick = () => {
 
 const rgbFillFunction = (event) => {
     if (!blackFill) {
-    event.target.classList.add('rgb')
+    randomColor = randomColorGenerator()
     event.target.classList.remove('filled')
+    event.target.style.backgroundColor = '#' + randomColor
     }
 }
 
+//Remove existing grid
 const clearGrid = () => {
     document.querySelector('.container').innerHTML=''
 }
 
+//Reset colors to white
 const reset = document.querySelector('.reset')
 reset.onclick= () => {
     let cells = document.getElementsByClassName('cell');
     Array.from(cells).forEach(function(cells) {
+        cells.style.backgroundColor = ''
         cells.className='cell'
     })
 }
 
-
+//Random Color Generator
+const randomColorGenerator = () => {
+    return Math.floor(Math.random()*16777215).toString(16);
+}
 
